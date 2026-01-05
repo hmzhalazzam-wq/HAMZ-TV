@@ -1,133 +1,237 @@
-/* HMZH TV - Theme: Cyberpunk Flat */
+/* --- إعدادات الخطوط والألوان (Cyberpunk Theme) --- */
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap');
+
+:root {
+    --bg-color: #050505;
+    --glass-bg: rgba(25, 25, 35, 0.6);
+    --glass-border: rgba(255, 255, 255, 0.1);
+    --neon-blue: #00cec9;
+    --neon-purple: #6c5ce7;
+    --text-color: #ffffff;
+    --card-hover: rgba(255, 255, 255, 0.15);
+    --focus-border: #f1c40f; /* لون التحديد بالريموت */
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    outline: none; /* إزالة الحدود الافتراضية */
+}
 
 body {
-    background: #050510;
-    color: white;
-    font-family: sans-serif;
-    margin: 0;
-    padding-bottom: 50px;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    font-family: 'Cairo', sans-serif;
+    direction: rtl;
+    overflow-x: hidden;
+    min-height: 100vh;
+    /* خلفية متدرجة متحركة */
+    background-image: radial-gradient(circle at 10% 20%, rgba(108, 92, 231, 0.15) 0%, transparent 20%),
+                      radial-gradient(circle at 90% 80%, rgba(0, 206, 201, 0.15) 0%, transparent 20%);
 }
 
-.hidden {
-    display: none !important;
-}
-
-/* Navbar */
+/* --- القائمة العلوية (Navbar) --- */
 .navbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 15px 30px;
-    background: rgba(0, 0, 0, 0.8);
     position: fixed;
     top: 0;
     width: 100%;
-    z-index: 100;
-    box-sizing: border-box;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 30px;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(15px);
+    z-index: 1000;
+    border-bottom: 1px solid var(--glass-border);
 }
 
 .logo {
     font-size: 24px;
-    font-weight: bold;
+    font-weight: 900;
+    letter-spacing: 1px;
 }
 
-.search-wrap {
-    background: #222;
+.highlight {
+    color: var(--neon-blue);
+    text-shadow: 0 0 10px var(--neon-blue);
+}
+
+.nav-actions {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.search-box {
+    position: relative;
+    background: rgba(255, 255, 255, 0.1);
     border-radius: 20px;
     padding: 5px 15px;
     display: flex;
     align-items: center;
-    gap: 10px;
+    border: 1px solid transparent;
+    transition: 0.3s;
 }
 
-input {
+.search-box:focus-within {
+    border-color: var(--neon-blue);
+    background: rgba(0, 0, 0, 0.5);
+}
+
+#search-input {
     background: transparent;
     border: none;
     color: white;
-    outline: none;
+    font-family: inherit;
+    width: 150px;
+    margin-left: 10px;
 }
 
-/* Hero */
-.hero {
-    height: 60vh;
-    background: linear-gradient(to top, #050510, transparent),
-        url('https://img.freepik.com/free-vector/gradient-technological-background_23-2148884155.jpg');
-    background-size: cover;
+#voice-btn {
+    cursor: pointer;
+    color: var(--neon-purple);
+    transition: 0.3s;
+}
+
+#voice-btn:hover {
+    color: white;
+    transform: scale(1.1);
+}
+
+/* --- القسم الرئيسي (Hero Section) --- */
+.hero-section {
+    position: relative;
+    height: 70vh; /* 70% من ارتفاع الشاشة */
     display: flex;
     align-items: center;
     padding: 0 50px;
-    margin-top: 60px;
+    margin-top: 70px;
+    overflow: hidden;
+}
+
+.hero-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to top, var(--bg-color), transparent 80%),
+                url('https://wallpapers.com/images/high/dark-abstract-background-3f6560y8019q732i.webp') center/cover;
+    z-index: -1;
+    filter: brightness(0.6);
 }
 
 .hero-content {
     max-width: 600px;
+    z-index: 2;
+    animation: fadeInUp 1s ease-out;
 }
 
-.badg {
-    background: #d63031;
+.live-badge {
+    background: #e74c3c;
+    color: white;
     padding: 5px 10px;
-    font-size: 12px;
     border-radius: 5px;
+    font-size: 0.9rem;
     font-weight: bold;
+    text-transform: uppercase;
 }
 
-h1 {
-    font-size: 40px;
-    margin: 10px 0;
+#hero-title {
+    font-size: 4rem;
+    margin: 15px 0;
+    line-height: 1.1;
+    text-shadow: 0 5px 15px rgba(0,0,0,0.5);
+}
+
+#hero-desc {
+    font-size: 1.2rem;
+    color: #ccc;
+    margin-bottom: 30px;
+    line-height: 1.6;
+}
+
+.btn-play, .btn-info {
+    padding: 12px 30px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    cursor: pointer;
+    font-family: inherit;
+    transition: 0.3s;
 }
 
 .btn-play {
-    background: #00cec9;
-    border: none;
-    padding: 10px 30px;
-    font-size: 18px;
-    font-weight: bold;
-    cursor: pointer;
-    border-radius: 5px;
-    transition: 0.2s;
+    background: white;
+    color: black;
+    margin-left: 15px;
 }
 
 .btn-play:hover {
-    transform: scale(1.1);
+    background: #ddd;
+    transform: scale(1.05);
 }
 
-/* Sliders */
+.btn-info {
+    background: rgba(109, 109, 110, 0.7);
+    color: white;
+}
+
+.btn-info:hover {
+    background: rgba(109, 109, 110, 0.9);
+}
+
+/* --- قوائم القنوات (Sliders) --- */
+.content-container {
+    padding: 20px 0 50px 30px;
+    position: relative;
+    z-index: 5;
+    margin-top: -50px; /* تداخل جميل مع الـ Hero */
+}
+
 .row-title {
-    font-size: 20px;
+    font-size: 1.4rem;
     font-weight: bold;
-    margin: 20px 50px 10px;
-    color: #aaa;
+    margin-bottom: 15px;
+    margin-right: 20px;
+    color: #eee;
 }
 
-.slider {
+.slider-wrapper {
     display: flex;
-    gap: 15px;
     overflow-x: auto;
-    padding: 10px 50px;
+    padding: 10px 0 30px 0;
     scroll-behavior: smooth;
+    gap: 15px;
+    scrollbar-width: none; /* إخفاء شريط التمرير */
 }
 
-.slider::-webkit-scrollbar {
+.slider-wrapper::-webkit-scrollbar {
     display: none;
 }
 
 .card {
-    min-width: 200px;
-    height: 140px;
-    background: #151520;
-    border-radius: 10px;
+    flex: 0 0 auto;
+    width: 200px; /* حجم البطاقة */
+    height: 120px;
     position: relative;
+    border-radius: 10px;
     overflow: hidden;
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
     cursor: pointer;
-    transition: 0.2s;
-    border: 3px solid transparent;
+    transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
 }
 
 .card img {
     width: 100%;
     height: 100%;
-    object-fit: cover;
-    opacity: 0.7;
+    object-fit: contain; /* تغيير من cover للحفاظ على شكل الشعار */
+    padding: 10px;
+    background: rgba(0,0,0,0.3);
 }
 
 .card-info {
@@ -135,27 +239,38 @@ h1 {
     bottom: 0;
     left: 0;
     width: 100%;
-    background: rgba(0, 0, 0, 0.8);
     padding: 10px;
-    font-size: 12px;
+    background: linear-gradient(to top, black, transparent);
+    opacity: 0;
+    transition: 0.3s;
 }
 
-/* TV FOCUS (High Contrast) */
-.card:focus,
-.card:hover {
-    transform: scale(1.1);
-    border-color: #00cec9;
-    /* Neon Cyan Border */
-    z-index: 10;
-    box-shadow: 0 0 20px rgba(0, 206, 201, 0.4);
-    outline: none;
-}
-
-.card:focus img {
+.card:hover .card-info, .card:focus .card-info {
     opacity: 1;
 }
 
-/* Player */
+.card strong {
+    display: block;
+    font-size: 0.9rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.card small {
+    font-size: 0.7rem;
+    color: #aaa;
+}
+
+/* 🔥 تأثير التلفاز (Focus State) 🔥 */
+.card:focus, .btn-play:focus, .btn-info:focus {
+    transform: scale(1.1);
+    border: 3px solid var(--focus-border); /* إطار أصفر عند التحديد بالريموت */
+    box-shadow: 0 0 20px rgba(241, 196, 15, 0.4);
+    z-index: 10;
+}
+
+/* --- المشغل المنبثق (Modal) --- */
 #player-modal {
     position: fixed;
     top: 0;
@@ -163,48 +278,152 @@ h1 {
     width: 100%;
     height: 100%;
     background: rgba(0, 0, 0, 0.95);
-    z-index: 1000;
+    z-index: 2000;
     display: flex;
-    justify-content: center;
     align-items: center;
+    justify-content: center;
+    opacity: 1;
+    transition: opacity 0.3s;
 }
 
-.player-box {
+.hidden {
+    opacity: 0;
+    pointer-events: none;
+    display: none !important;
+}
+
+.player-wrapper {
     width: 90%;
-    max-width: 900px;
+    max-width: 1000px;
+    background: #111;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 0 50px rgba(0, 206, 201, 0.2);
+    position: relative;
 }
 
-.player-top {
+.player-header {
     display: flex;
     justify-content: space-between;
-    margin-bottom: 10px;
+    align-items: center;
+    padding: 15px 20px;
+    background: rgba(255,255,255,0.05);
 }
 
-video {
+.video-container {
+    position: relative;
     width: 100%;
-    border-radius: 10px;
     background: black;
+    /* الحفاظ على نسبة العرض 16:9 */
+    aspect-ratio: 16 / 9;
 }
 
-.player-controls {
-    margin-top: 10px;
+#video-player {
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+    position: relative;
+}
+
+/* Ambilight Effect (Canvas خلف الفيديو) */
+#ambilight {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    filter: blur(50px);
+    opacity: 0.6;
+}
+
+.channel-stats {
+    padding: 15px;
     display: flex;
-    gap: 20px;
+    justify-content: space-between;
+    align-items: center;
+    color: #aaa;
+    font-size: 0.9rem;
 }
 
-select {
-    background: #333;
+#like-btn {
+    background: transparent;
+    border: 1px solid #333;
     color: white;
-    border: none;
-    padding: 5px;
+    padding: 5px 15px;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: 0.2s;
 }
 
-/* Panic */
+#like-btn:hover {
+    border-color: #e74c3c;
+    color: #e74c3c;
+}
+
+/* --- شاشة الذعر (Excel) --- */
 #panic-overlay {
     position: fixed;
     top: 0;
     left: 0;
     width: 100vw;
     height: 100vh;
+    background: white;
     z-index: 9999;
+    color: black;
+    font-family: 'Segoe UI', sans-serif;
+    font-size: 14px;
+}
+
+.excel-header {
+    background: #217346;
+    color: white;
+    padding: 8px;
+    text-align: center;
+}
+
+.excel-body {
+    padding: 20px;
+}
+.excel-body table {
+    width: 100%;
+    border-collapse: collapse;
+}
+.excel-body td, .excel-body th {
+    border: 1px solid #ccc;
+    padding: 5px;
+    text-align: left;
+}
+
+/* --- التحميل (Loader) --- */
+.loader-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 200px;
+    font-size: 1.5rem;
+    color: var(--neon-blue);
+    gap: 10px;
+}
+
+/* --- تجاوب الموبايل --- */
+@media (max-width: 768px) {
+    .hero-title { font-size: 2.5rem; }
+    .card { width: 140px; height: 180px; } /* بالطول للموبايل أفضل */
+    .card img { height: 70%; object-fit: contain; }
+    .navbar { padding: 0 15px; }
+    .search-box input { width: 100px; }
+    
+    /* جعل البطاقات تظهر عمودياً في الموبايل */
+    .slider-wrapper {
+        display: flex;
+        flex-wrap: nowrap; /* إبقاء السحب الأفقي */
+        gap: 10px;
+    }
+}
+
+/* Animation */
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
 }
