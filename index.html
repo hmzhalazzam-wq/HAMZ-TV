@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- FIX: مسار الملفات النسبي (مهم جداً لـ GitHub Pages) -->
+    <link rel="stylesheet" href="./style.css">
+
+    <!-- FIX: السماح بتشغيل المحتوى المتنوع (HTTP Upgrade) -->
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+
+    <title>HMZH TV | Premium</title>
+
+    <!-- Google Cast -->
+    <script src="https://www.gstatic.com/cv/js/sender/v1/cast_sender.js?loadCastFramework=1"></script>
+    <!-- Player -->
+    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+
+    <!-- وضع الذعر (Excel Fake) -->
+    <div id="panic-overlay" class="hidden">
+        <div style="background:#217346; color:white; padding:5px;">Book1 - Excel</div>
+        <div style="background:white; height:100vh; color:black; padding:20px; font-family:monospace;">
+            A1: Annual Report 2026 Loading...
+        </div>
+    </div>
+
+    <!-- التطبيق الرئيسي -->
+    <div id="app">
+
+        <!-- البار العلوي -->
+        <nav class="navbar">
+            <div class="logo">HMZH <span style="color:#00cec9">TV</span></div>
+            <div class="actions">
+                <google-cast-launcher id="cast-btn"></google-cast-launcher>
+                <div class="search-wrap">
+                    <input type="text" id="search" placeholder="بحث...">
+                    <i class="fa-solid fa-microphone"></i>
+                </div>
+            </div>
+        </nav>
+
+        <!-- القسم المميز (Hero) -->
+        <header class="hero">
+            <div class="hero-content">
+                <span class="badg">🔥 مباشر الآن</span>
+                <h1 id="hero-title">جاري التحميل...</h1>
+                <p id="hero-desc">يرجى الانتظار قليلاً...</p>
+                <button onclick="playHero()" class="btn-play"><i class="fa-solid fa-play"></i> شاهد الآن</button>
+            </div>
+        </header>
+
+        <!-- الأقسام المتتابعة (Sliders) -->
+        <main id="rows-container">
+            <!-- سيتم ملؤه بواسطة JS -->
+            <div style="text-align:center; padding:50px; color:#666;">
+                <i class="fa-solid fa-circle-notch fa-spin"></i> جاري الاتصال بالسحابة...
+            </div>
+        </main>
+
+    </div>
+
+    <!-- مشغل الفيديو -->
+    <div id="player-modal" class="hidden">
+        <div class="player-box">
+            <div class="player-top">
+                <h3 id="player-title">العنوان</h3>
+                <button onclick="closePlayer()">✕</button>
+            </div>
+            <video id="video" controls autoplay></video>
+            <div class="player-controls">
+                <select id="sleep-timer">
+                    <option value="0">⏰ المؤقت</option>
+                    <option value="15">15 دقيقة</option>
+                    <option value="30">30 دقيقة</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <!-- FIX: مسار الملف النسبي -->
+    <script src="./app.js"></script>
+</body>
+
+</html>

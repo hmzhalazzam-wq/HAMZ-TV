@@ -1,0 +1,210 @@
+/* HMZH TV - Theme: Cyberpunk Flat */
+
+body {
+    background: #050510;
+    color: white;
+    font-family: sans-serif;
+    margin: 0;
+    padding-bottom: 50px;
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* Navbar */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 30px;
+    background: rgba(0, 0, 0, 0.8);
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 100;
+    box-sizing: border-box;
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.search-wrap {
+    background: #222;
+    border-radius: 20px;
+    padding: 5px 15px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+input {
+    background: transparent;
+    border: none;
+    color: white;
+    outline: none;
+}
+
+/* Hero */
+.hero {
+    height: 60vh;
+    background: linear-gradient(to top, #050510, transparent),
+        url('https://img.freepik.com/free-vector/gradient-technological-background_23-2148884155.jpg');
+    background-size: cover;
+    display: flex;
+    align-items: center;
+    padding: 0 50px;
+    margin-top: 60px;
+}
+
+.hero-content {
+    max-width: 600px;
+}
+
+.badg {
+    background: #d63031;
+    padding: 5px 10px;
+    font-size: 12px;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+h1 {
+    font-size: 40px;
+    margin: 10px 0;
+}
+
+.btn-play {
+    background: #00cec9;
+    border: none;
+    padding: 10px 30px;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: 0.2s;
+}
+
+.btn-play:hover {
+    transform: scale(1.1);
+}
+
+/* Sliders */
+.row-title {
+    font-size: 20px;
+    font-weight: bold;
+    margin: 20px 50px 10px;
+    color: #aaa;
+}
+
+.slider {
+    display: flex;
+    gap: 15px;
+    overflow-x: auto;
+    padding: 10px 50px;
+    scroll-behavior: smooth;
+}
+
+.slider::-webkit-scrollbar {
+    display: none;
+}
+
+.card {
+    min-width: 200px;
+    height: 140px;
+    background: #151520;
+    border-radius: 10px;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    transition: 0.2s;
+    border: 3px solid transparent;
+}
+
+.card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.7;
+}
+
+.card-info {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    padding: 10px;
+    font-size: 12px;
+}
+
+/* TV FOCUS (High Contrast) */
+.card:focus,
+.card:hover {
+    transform: scale(1.1);
+    border-color: #00cec9;
+    /* Neon Cyan Border */
+    z-index: 10;
+    box-shadow: 0 0 20px rgba(0, 206, 201, 0.4);
+    outline: none;
+}
+
+.card:focus img {
+    opacity: 1;
+}
+
+/* Player */
+#player-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.95);
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.player-box {
+    width: 90%;
+    max-width: 900px;
+}
+
+.player-top {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+video {
+    width: 100%;
+    border-radius: 10px;
+    background: black;
+}
+
+.player-controls {
+    margin-top: 10px;
+    display: flex;
+    gap: 20px;
+}
+
+select {
+    background: #333;
+    color: white;
+    border: none;
+    padding: 5px;
+}
+
+/* Panic */
+#panic-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 9999;
+}
