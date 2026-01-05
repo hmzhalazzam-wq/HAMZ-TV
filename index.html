@@ -1,91 +1,107 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
-
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <!-- FIX: مسار الملفات النسبي (مهم جداً لـ GitHub Pages) -->
-    <link rel="stylesheet" href="./style.css">
-
-    <!-- FIX: السماح بتشغيل المحتوى المتنوع (HTTP Upgrade) -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    
     <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+    
+    <title>HMZH TV | البث المباشر</title>
+    
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#000000">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 
-    <title>HMZH TV | Premium</title>
-
-    <!-- Google Cast -->
-    <script src="https://www.gstatic.com/cv/js/sender/v1/cast_sender.js?loadCastFramework=1"></script>
-    <!-- Player -->
-    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
-    <!-- Icons -->
+    <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+    <script src="https://www.gstatic.com/cv/js/sender/v1/cast_sender.js?loadCastFramework=1"></script>
 </head>
-
 <body>
 
-    <!-- وضع الذعر (Excel Fake) -->
     <div id="panic-overlay" class="hidden">
-        <div style="background:#217346; color:white; padding:5px;">Book1 - Excel</div>
-        <div style="background:white; height:100vh; color:black; padding:20px; font-family:monospace;">
-            A1: Annual Report 2026 Loading...
+        <div class="excel-header">Book1 - Excel <span style="float:left">_ □ X</span></div>
+        <div class="excel-body">
+            <table>
+                <tr><th>A</th><th>B</th><th>C</th><th>D</th></tr>
+                <tr><td>1</td><td>Annual Report</td><td>2024</td><td>Pending</td></tr>
+                <tr><td>2</td><td>Q1 Budget</td><td>$45,000</td><td>Approved</td></tr>
+                <tr><td>3</td><td>Q2 Forecast</td><td>$52,000</td><td>Review</td></tr>
+            </table>
         </div>
     </div>
 
-    <!-- التطبيق الرئيسي -->
     <div id="app">
-
-        <!-- البار العلوي -->
+        
         <nav class="navbar">
-            <div class="logo">HMZH <span style="color:#00cec9">TV</span></div>
-            <div class="actions">
+            <div class="logo">HMZH <span class="highlight">TV</span></div>
+            
+            <div class="nav-actions">
                 <google-cast-launcher id="cast-btn"></google-cast-launcher>
-                <div class="search-wrap">
-                    <input type="text" id="search" placeholder="بحث...">
-                    <i class="fa-solid fa-microphone"></i>
+                
+                <div class="search-box">
+                    <input type="text" id="search-input" placeholder="ابحث عن قناة...">
+                    <i class="fa-solid fa-microphone" id="voice-btn" title="بحث صوتي"></i>
                 </div>
             </div>
         </nav>
 
-        <!-- القسم المميز (Hero) -->
-        <header class="hero">
+        <header class="hero-section" id="hero">
+            <div class="hero-bg"></div>
             <div class="hero-content">
-                <span class="badg">🔥 مباشر الآن</span>
+                <span class="live-badge">🔥 الأكثر مشاهدة الآن</span>
                 <h1 id="hero-title">جاري التحميل...</h1>
-                <p id="hero-desc">يرجى الانتظار قليلاً...</p>
-                <button onclick="playHero()" class="btn-play"><i class="fa-solid fa-play"></i> شاهد الآن</button>
+                <p id="hero-desc">يرجى الانتظار، جاري جلب القنوات من السيرفر السحابي...</p>
+                <div class="hero-buttons">
+                    <button class="btn-play" onclick="playHero()">
+                        <i class="fa-solid fa-play"></i> مشاهدة مباشرة
+                    </button>
+                    <button class="btn-info">
+                        <i class="fa-solid fa-circle-info"></i> تفاصيل
+                    </button>
+                </div>
             </div>
         </header>
 
-        <!-- الأقسام المتتابعة (Sliders) -->
-        <main id="rows-container">
-            <!-- سيتم ملؤه بواسطة JS -->
-            <div style="text-align:center; padding:50px; color:#666;">
-                <i class="fa-solid fa-circle-notch fa-spin"></i> جاري الاتصال بالسحابة...
+        <main id="content-rows" class="content-container">
+            <div class="loader-center">
+                <i class="fa-solid fa-circle-notch fa-spin"></i> جاري تهيئة النظام...
             </div>
         </main>
 
     </div>
 
-    <!-- مشغل الفيديو -->
     <div id="player-modal" class="hidden">
-        <div class="player-box">
-            <div class="player-top">
-                <h3 id="player-title">العنوان</h3>
-                <button onclick="closePlayer()">✕</button>
+        <div class="player-wrapper">
+            <div class="player-header">
+                <h3 id="player-channel-name">اسم القناة</h3>
+                <div class="player-tools">
+                    <select id="sleep-timer">
+                        <option value="0">⏰ المؤقت</option>
+                        <option value="15">15 دقيقة</option>
+                        <option value="30">30 دقيقة</option>
+                        <option value="60">1 ساعة</option>
+                    </select>
+                    <button class="close-btn" onclick="closePlayer()">✕</button>
+                </div>
             </div>
-            <video id="video" controls autoplay></video>
-            <div class="player-controls">
-                <select id="sleep-timer">
-                    <option value="0">⏰ المؤقت</option>
-                    <option value="15">15 دقيقة</option>
-                    <option value="30">30 دقيقة</option>
-                </select>
+            
+            <div class="video-container">
+                <video id="video-player" controls autoplay playsinline></video>
+                <canvas id="ambilight"></canvas>
+            </div>
+            
+            <div class="channel-stats">
+                <span><i class="fa-solid fa-eye"></i> <span id="view-count">0</span> مشاهد</span>
+                <button id="like-btn" onclick="toggleLike()">
+                    <i class="fa-regular fa-heart"></i> <span id="like-count">0</span>
+                </button>
             </div>
         </div>
     </div>
 
-    <!-- FIX: مسار الملف النسبي -->
-    <script src="./app.js"></script>
+    <script src="app.js"></script>
 </body>
-
 </html>
