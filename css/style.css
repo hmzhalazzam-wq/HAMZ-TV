@@ -1,0 +1,234 @@
+body {
+    background: #111;
+    color: white;
+    font-family: 'Cairo', sans-serif;
+    margin: 0;
+    overflow-x: hidden;
+}
+
+/* Cast Button */
+google-cast-launcher {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    z-index: 999;
+    --connected-color: #4CAF50;
+    --disconnected-color: #fff;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 30px;
+    margin-top: 10px;
+}
+
+.brand {
+    font-size: 28px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.brand i {
+    color: #3498db;
+}
+
+.search-box input {
+    width: 100%;
+    max-width: 400px;
+    padding: 15px;
+    border-radius: 50px;
+    border: none;
+    background: #222;
+    color: white;
+    font-size: 16px;
+    text-align: center;
+}
+
+.search-box input:focus {
+    outline: 2px solid #3498db;
+    background: #333;
+}
+
+.cats {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 30px;
+    flex-wrap: wrap;
+}
+
+.cat-btn {
+    padding: 10px 20px;
+    border-radius: 20px;
+    border: none;
+    background: #222;
+    color: #aaa;
+    cursor: pointer;
+    font-family: inherit;
+    transition: 0.2s;
+}
+
+.cat-btn:hover,
+.cat-btn.active {
+    background: white;
+    color: black;
+    transform: scale(1.05);
+}
+
+/* Grid */
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 20px;
+}
+
+/* TV Optimization: Focus Styles */
+.card {
+    background: #1e1e1e;
+    border-radius: 12px;
+    padding: 15px;
+    text-align: center;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    outline: none;
+    /* Performance Boosts */
+    content-visibility: auto;
+    contain-intrinsic-size: 160px 120px;
+    will-change: transform;
+}
+
+
+.card img {
+    width: 60px;
+    height: 60px;
+    margin-bottom: 10px;
+    object-fit: contain;
+}
+
+.title {
+    font-size: 14px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.card:hover,
+.card:focus {
+    transform: scale(1.1);
+    background: #2c2c2c;
+    box-shadow: 0 0 15px rgba(52, 152, 219, 0.5);
+    border: 1px solid #3498db;
+}
+
+/* Player */
+#player-container.hidden {
+    display: none;
+}
+
+#player-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.95);
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.video-box {
+    width: 90%;
+    max-width: 800px;
+}
+
+video {
+    width: 100%;
+    border-radius: 10px;
+}
+
+#channel-name {
+    margin-top: 20px;
+}
+
+.controls {
+    margin-top: 10px;
+    display: flex;
+    gap: 15px;
+}
+
+.btn-close {
+    padding: 10px 20px;
+    background: #e74c3c;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.btn-cast {
+    padding: 10px 20px;
+    background: #3498db;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* PWA & Cinematic Actions */
+.top-actions {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    z-index: 999;
+    display: flex;
+    gap: 10px;
+}
+
+#install-btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: #00cec9;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 0 10px rgba(0, 206, 201, 0.5);
+    transition: 0.3s;
+}
+
+#install-btn.hidden {
+    display: none;
+}
+
+#install-btn:hover {
+    transform: scale(1.1);
+}
+
+/* Cinematic Idle Mode */
+.idle-active {
+    cursor: none;
+}
+
+.idle-active .top-actions,
+.idle-active .controls,
+.idle-active .btn-close {
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.5s;
+}
